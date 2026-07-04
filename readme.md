@@ -1,6 +1,6 @@
 # Display % of target color in an image
 ```bash
-$ ros2 launch color_pct_pgurationkg color_pct_pkg.launch.py
+$ ros2 launch color_pct_pkg color_pct_pkg.launch.py
 ```
 
 On a separate terminal, run rqt

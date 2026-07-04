@@ -1,12 +1,12 @@
 # With params 
 #
+import cv2
 import rclpy
+from cv_bridge import CvBridge
+from rcl_interfaces.msg import IntegerRange, ParameterDescriptor, SetParametersResult
 from rclpy.node import Node
 from sensor_msgs.msg import Image
-from rcl_interfaces.msg import ParameterDescriptor, IntegerRange, SetParametersResult
-import cv2
-from cv_bridge import CvBridge
-import numpy as np
+
 
 class WhitePct(Node):
     def __init__(self):
@@ -19,6 +19,12 @@ class WhitePct(Node):
         self.s_high = 255
         self.v_low = 0
         self.v_high = 255
+        
+        # Declare the parameter with a default topic name
+        self.declare_parameter('cam_topic', '/image_raw')
+        
+        # Read the parameter value
+        cam_topic = self.get_parameter('cam_topic').value
 
         # Define HSV parameters
         int_range = IntegerRange(from_value=0, to_value=179, step=1)
@@ -50,11 +56,10 @@ class WhitePct(Node):
         # Initialize the CvBridge utility
         self.bridge = CvBridge()
         
-        # Subscribe to the webcam stream topic published by usb_cam
-        # (Change '/image_raw' to '/camera' if you remapped the usb_cam output)
+        # Subscribe to the webcam stream topic published 
         self.subscription = self.create_subscription(
             Image,
-            '/image_raw',
+            cam_topic, # type: ignore or improve later
             self.listener_callback,
             10)
             
