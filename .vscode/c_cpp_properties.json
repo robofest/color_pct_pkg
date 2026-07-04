@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/developer/ros2_ws/install/dbw_polaris_can/include/**",
+        "/home/developer/ros2_ws/install/dbw_polaris_msgs/include/**",
+        "/home/developer/ros2_ws/install/dataspeed_ulc_can/include/**",
+        "/home/developer/ros2_ws/install/dataspeed_ulc_msgs/include/**",
+        "/home/developer/ros2_ws/install/dataspeed_dbw_common/include/**",
+        "/opt/ros/jazzy/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ros2",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
