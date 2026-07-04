@@ -1,4 +1,4 @@
-# With params 
+# With a param for Image topic name. 
 #
 import cv2
 import rclpy
