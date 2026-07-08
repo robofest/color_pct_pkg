@@ -11,7 +11,7 @@ def generate_launch_description():
     
     # 1. Path to your bag file directory (Replace with your actual path)
     # Example: '/home/user/bag_files/my_camera_data'
-    bag_file_path = '/home/developer/rosbags/L_sun1_bag'
+    bag_file_path = '/home/developer/rosbags/R_sun2_bag'
 
     # 2. Process to play the rosbag file
     rosbag_play = ExecuteProcess(
@@ -30,9 +30,13 @@ def generate_launch_description():
             {'cam_topic': '/cam_pub/image_raw'}
         ]
     )
+    
+    # 4. Process to spin up the rqt GUI interface
+    rqt_gui = ExecuteProcess(cmd=["rqt"], output="screen")
 
     return LaunchDescription([
         quiet_qt,
         rosbag_play,
-        image_view_node
+        image_view_node,
+        rqt_gui
     ])
