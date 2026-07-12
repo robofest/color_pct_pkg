@@ -1,5 +1,7 @@
-from launch import LaunchDescription
 from launch_ros.actions import Node
+
+from launch import LaunchDescription
+
 
 def generate_launch_description():
     return LaunchDescription([
@@ -16,17 +18,17 @@ def generate_launch_description():
                 {'framerate': 20.0}, # was 30.0
                 
                 # --- The WSL Bandwidth Fix (MJPEG Compression) ---
-                {'pixel_format': 'mjpeg2rgb'},  # Hardware compression over usbipd
+                {'pixel_format': 'yuyv2rgb'},  # Hardware compression over usbipd
                 {'io_method': 'mmap'},
 
                 # --- Image/Brightness Controls ---
                 # Note: Parameter names depend on the driver version. 
                 # If these specific parameters aren't parsed by your version, 
                 # keep using 'v4l2-ctl' in a separate terminal.
-                {'brightness': 180},           # Boost low-light performance, was 200
-                {'gain': 150},                 # Increases sensitivity if supported
-                {'autoexposure': False},       # Set to False to manually override exposure
-                {'exposure': 150},             # Adjust exposure absolute value
+                # {'brightness': 180},           # Boost low-light performance, was 200
+                # {'gain': 150},                 # Increases sensitivity if supported
+                # {'autoexposure': False},       # Set to False to manually override exposure
+                # {'exposure': 150},             # Adjust exposure absolute value
                 
                 # --- Topic Configuration ---
                 {'camera_name': 'default_cam'},
@@ -37,6 +39,13 @@ def generate_launch_description():
             package='color_pct_pkg',
             executable='color_pct_node_exe',
             name='color_pct_node', # nick_name for this node
+            output='screen'
+        ),
+        # --- Added rqt_gui to visualize topics/images/dyn reconfigure ---
+        Node(
+            package='rqt_gui',
+            executable='rqt_gui',
+            name='rqt_gui',
             output='screen'
         )
     ])
